@@ -1,0 +1,1 @@
+Convert the Bricklink Lego parts database into RDF
