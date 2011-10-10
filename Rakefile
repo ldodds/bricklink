@@ -21,16 +21,28 @@ def mkdirs()
 end
 
 task :init do
-  mkdirs()      
+  mkdirs()
 end
 
-#cache manifest
 task :download => [:init] do
-  #TODO
-end
-
-task :cache_inventories do
-  sh %{ruby bin/cache_inventories.rb data/cache/inventory data/cache/Sets.txt}  
+  URL = "http://www.bricklink.com/catalogDownload.asp?a=a"
+  params = "&viewType=0&&selYear=Y&selWeight=Y&selDim=Y&downloadType=X"
+  sh %{curl -d "itemType=S#{params}" #{URL} >#{CACHE_DIR}/Sets.txt}
+  sh %{curl -d "itemType=P#{params}" #{URL} >#{CACHE_DIR}/Parts.txt}   
+  sh %{curl -d "itemType=M#{params}" #{URL} >#{CACHE_DIR}/Minifigs.txt}
+  sh %{curl -d "itemType=B#{params}" #{URL} >#{CACHE_DIR}/Books.txt}
+  sh %{curl -d "itemType=G#{params}" #{URL} >#{CACHE_DIR}/Gear.txt}
+  sh %{curl -d "itemType=C#{params}" #{URL} >#{CACHE_DIR}/Catalogs.txt}
+  sh %{curl -d "itemType=I#{params}" #{URL} >#{CACHE_DIR}/Instructions.txt}     
+  sh %{curl -d "itemType=O#{params}" #{URL} >#{CACHE_DIR}/Original-Boxes.txt}
+  
+  sh %{curl -d "viewType=1&downloadType=X" #{URL} >#{CACHE_DIR}/itemtypes.txt}
+  sh %{curl -d "viewType=2&downloadType=X" #{URL} >#{CACHE_DIR}/categories.txt}
+  sh %{curl -d "viewType=3&downloadType=X" #{URL} >#{CACHE_DIR}/colors.txt}
+  sh %{curl -d "viewType=5&downloadType=X" #{URL} >#{CACHE_DIR}/codes.txt}
+  
+  #Cache inventories
+  sh %{ruby bin/cache_inventories.rb data/cache/inventory data/cache/Sets.txt}
 end
 
 task :convert_static do
