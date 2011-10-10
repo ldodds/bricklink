@@ -44,7 +44,8 @@ class Book < LegoItemBase
     add_property( RDF::DC.identifier, RDF::Literal.new( @fields["ITEMID"] ) )
     add_property( RDF::RDFS.label, RDF::Literal.new( @fields["ITEMNAME"] ) )
     add_property( bricklink.category, RDF::URI.new( Util.canonicalize("/category/#{@fields["CATEGORY"]}" ) ) )    
-    add_property( RDF::DC.published, RDF::Literal.new( @fields["ITEMYEAR"]) ) if @fields["ITEMYEAR"]
+    add_property( RDF::DC.published, RDF::Literal.new( @fields["ITEMYEAR"]) ) if @fields["ITEMYEAR"]   
+    add_property( RDF::DC.publisher, RDF::URI.new( "http://dbpedia.org/resource/Lego_Group" ) )
       
     add_property( bricklink.weight, RDF::Literal.new( @fields["ITEMWEIGHT"] ) ) if @fields["ITEMWEIGHT"]
     add_property( bricklink.dimensionX, RDF::Literal.new( @fields["ITEMDIMX"] ) ) if @fields["ITEMDIMX"]

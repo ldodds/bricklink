@@ -47,7 +47,9 @@ class Product < LegoItemBase
     add_property( bricklink.dimensionX, RDF::Literal.new( @fields["ITEMDIMX"] ) ) if @fields["ITEMDIMX"]
     add_property( bricklink.dimensionY, RDF::Literal.new( @fields["ITEMDIMY"] ) ) if @fields["ITEMDIMY"]
     add_property( bricklink.dimensionZ, RDF::Literal.new( @fields["ITEMDIMZ"] ) ) if @fields["ITEMDIMZ"]
-      
+    
+    add_property( RDF::FOAF.maker, RDF::URI.new( "http://dbpedia.org/resource/Lego_Group" ) )
+            
   end
   
 end

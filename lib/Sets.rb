@@ -47,6 +47,8 @@ class Set < LegoItemBase
     add_property( RDF::FOAF.isPrimaryTopicOf, RDF::URI.new( "http://www.brickset.com/detail/?Set=#{@fields["ITEMID"]}" ) )    
     add_property( RDF::FOAF.isPrimaryTopicOf, RDF::URI.new( "http://guide.lugnet.com/set/#{@fields["ITEMID"].split("-")[0]}" ) )        
 
+    add_property( RDF::FOAF.maker, RDF::URI.new( "http://dbpedia.org/resource/Lego_Group" ) )
+    
 #    add_property( bricklink.instructions, RDF::URI.new( "http://www.bricklink.com/catalogItem.asp?I=#{@fields["ITEMID"]}") )  
       
     add_property( bricklink.weight, RDF::Literal.new( @fields["ITEMWEIGHT"] ) ) if @fields["ITEMWEIGHT"]
